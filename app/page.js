@@ -6,6 +6,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { TaskCard } from "../components/task-card";
 import { TaskFilters } from "../components/task-filters";
 import FloatingBackground from "../components/floating-background";
+import { BackgroundGrid } from "../components/ui/background-grid";
+import { Button3D } from "../components/ui/button-3d";
 import { mockTasks } from "../lib/mock-data";
 import { getTaskSuggestions, getPriorityRecommendation } from "../lib/ai";
 
@@ -92,54 +94,52 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen p-8">
+    <main className="min-h-screen overflow-hidden">
+      <BackgroundGrid className="fixed inset-0" />
       <FloatingBackground />
       
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="max-w-6xl mx-auto"
+        className="relative max-w-6xl mx-auto px-8 py-12"
       >
-        <motion.h1
-          className="text-4xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600"
+        <motion.div
+          className="text-center mb-12"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
         >
-          Task Manager
-        </motion.h1>
+          <motion.h1
+            className="text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600"
+            animate={{ 
+              backgroundPosition: ["0%", "100%"],
+              transition: { duration: 5, repeat: Infinity, repeatType: "reverse" }
+            }}
+            style={{ backgroundSize: "200% auto" }}
+          >
+            Task Manager
+          </motion.h1>
+          <p className="text-xl text-gray-600">Organize your work with AI-powered efficiency</p>
+        </motion.div>
 
-        <form onSubmit={handleNewTaskSubmit} className="mb-8">
-          <div className="flex gap-4">
+        <form onSubmit={handleNewTaskSubmit} className="mb-12">
+          <div className="flex gap-4 backdrop-blur-sm bg-white/30 p-4 rounded-2xl shadow-xl">
             <motion.input
               whileFocus={{ scale: 1.01 }}
               type="text"
               value={newTaskInput}
               onChange={(e) => setNewTaskInput(e.target.value)}
               placeholder="Enter a new task..."
-              className="flex-1 p-4 rounded-lg shadow-sm border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500"
+              className="flex-1 p-4 rounded-xl bg-white/50 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 placeholder:text-gray-400"
               disabled={isLoading}
             />
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+            <Button3D
               type="submit"
-              className={`px-6 py-4 text-white rounded-lg shadow-lg transition-all ${
-                isLoading 
-                  ? "bg-purple-400 cursor-not-allowed"
-                  : "bg-purple-600 hover:bg-purple-700"
-              }`}
               disabled={isLoading}
+              isLoading={isLoading}
             >
-              {isLoading ? (
-                <span className="flex items-center gap-2">
-                  <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                  Adding...
-                </span>
-              ) : (
-                "Add Task"
-              )}
-            </motion.button>
+              {isLoading ? "Adding..." : "Add Task"}
+            </Button3D>
           </div>
         </form>
 
@@ -172,11 +172,23 @@ export default function Home() {
 
         {getFilteredAndSortedTasks().length === 0 && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-center text-gray-500 mt-8"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="text-center mt-12 p-8 backdrop-blur-sm bg-white/30 rounded-2xl border border-white/20"
           >
-            No tasks found. Try changing the filter or adding a new task!
+            <motion.div
+              animate={{ 
+                y: [0, -10, 0],
+                transition: { duration: 2, repeat: Infinity, }
+              }}
+              className="mb-4 text-6xl opacity-50"
+            >
+              🎯
+            </motion.div>
+            <h3 className="text-xl font-semibold text-gray-700 mb-2">No tasks found</h3>
+            <p className="text-gray-600">
+              Try changing the filter or add a new task to get started!
+            </p>
           </motion.div>
         )}
       </motion.div>
