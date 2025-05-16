@@ -10,7 +10,7 @@ export function TaskFilters({ onFilterChange, onSortChange, activeFilter }) {
 
   return (
     <motion.div 
-      className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-8 p-4 backdrop-blur-sm bg-white/30 rounded-2xl shadow-xl border border-white/20"
+      className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-8 p-4 backdrop-blur-sm bg-white/30 dark:bg-black/30 rounded-2xl shadow-xl border border-white/20 dark:border-white/10"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.3 }}
@@ -24,11 +24,10 @@ export function TaskFilters({ onFilterChange, onSortChange, activeFilter }) {
             onClick={() => onFilterChange(filter)}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 + 0.4 }}
-            className={`px-6 py-2 rounded-xl transition-all duration-200 font-medium ${
+            transition={{ delay: index * 0.1 + 0.4 }}            className={`px-6 py-2 rounded-xl transition-all duration-200 font-medium ${
               activeFilter === filter
                 ? "bg-purple-600 text-white shadow-lg shadow-purple-500/30"
-                : "bg-white/50 text-gray-700 hover:bg-purple-50 hover:text-purple-600"
+                : "bg-white/50 dark:bg-white/10 text-gray-700 dark:text-gray-200 hover:bg-purple-50 dark:hover:bg-purple-900/50 hover:text-purple-600 dark:hover:text-purple-300"
             }`}
           >
             {filter}

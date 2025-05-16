@@ -39,7 +39,7 @@ export function TaskCard({ task, onSelect, onUpdate }) {
         initial="initial"
         animate="animate"
         variants={priorityAnimations[task.priority]}
-        className="group cursor-pointer transform-gpu bg-white/80 backdrop-blur-sm p-6 rounded-xl border border-white/20 shadow-xl hover:shadow-2xl transition-all"
+        className="group cursor-pointer transform-gpu bg-white/80 dark:bg-black/50 backdrop-blur-sm p-6 rounded-xl border border-white/20 dark:border-white/10 shadow-xl hover:shadow-2xl transition-all"
         onClick={() => setIsModalOpen(true)}
         onMouseMove={handleMouseMove}
         whileHover={{ y: -4 }}

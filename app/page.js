@@ -110,7 +110,7 @@ export default function Home() {
           transition={{ delay: 0.2 }}
         >
           <motion.h1
-            className="text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600"
+            className="text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 dark:from-purple-400 dark:via-pink-400 dark:to-blue-400"
             animate={{ 
               backgroundPosition: ["0%", "100%"],
               transition: { duration: 5, repeat: Infinity, repeatType: "reverse" }
